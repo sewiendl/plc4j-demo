@@ -27,11 +27,9 @@ public class Main {
             System.out.println();
 
             // non optimized DB
-            for (int i = 0; i < 10000; i++) {
+            for (int i = 0; i < 1; i++) {
                 PlcReadRequest.Builder builder = plcConnection.readRequestBuilder();
-                builder.addItem("Int", "%DB101.DBW78:INT");
-                builder.addItem("DInt", "%DB101.DBD80:DINT");
-                builder.addItem("SinusReal", "%DB101.DBD118:REAL");
+                builder.addItem("LReal", "%DB101.DBX110:LREAL");
                 PlcReadRequest readRequest = builder.build();
                 LocalDateTime start = now();
                 PlcReadResponse plcReadResponse = readRequest.execute().get();
