@@ -27,23 +27,27 @@ public class Main {
             System.out.println();
 
             // non optimized DB
-            for (int i = 0; i < 10000; i++) {
+            for (int i = 0; i < 100; i++) {
                 PlcReadRequest.Builder builder = plcConnection.readRequestBuilder();
                 builder.addItem("Int", "%DB101.DBW78:INT");
                 builder.addItem("DInt", "%DB101.DBD80:DINT");
                 builder.addItem("SinusReal", "%DB101.DBD118:REAL");
+                builder.addItem("String", "%DB101.DBX124:STRING");
+                builder.addItem("NegativeInt", "%DB101.DBW380:INT");
+                builder.addItem("I0.0", "%I0.0:BOOL");
+                builder.addItem("Q0.0", "%Q0.0:BOOL");
                 PlcReadRequest readRequest = builder.build();
                 LocalDateTime start = now();
                 PlcReadResponse plcReadResponse = readRequest.execute().get();
-                if (i % 1000 == 0) {
+//                if (i % 1000 == 0) {
                     System.out.println("request i=" + i + " took " + Duration.between(start, now()));
                     for (String rfn : plcReadResponse.getFieldNames()) {
                         Object o = plcReadResponse.getObject(rfn);
                         System.out.println(rfn + " response: " + plcReadResponse.getResponseCode(rfn) + "; value: " + o + "; data type: " + o.getClass().getCanonicalName());
                     }
                     System.out.println();
-                }
-                Thread.sleep(10);
+//                }
+                Thread.sleep(100);
             }
             System.out.println("all requests took " + Duration.between(startTotal, now()));
 
