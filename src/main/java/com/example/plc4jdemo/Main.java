@@ -36,6 +36,8 @@ public class Main {
                 builder.addItem("NegativeInt", "%DB101.DBW380:INT");
                 builder.addItem("I0.0", "%I0.0:BOOL");
                 builder.addItem("Q0.0", "%Q0.0:BOOL");
+                builder.addItem("Merkerbit", "%M0.1:BOOL");
+                builder.addItem("MerkerInt", "%MW2:INT");
                 PlcReadRequest readRequest = builder.build();
                 LocalDateTime start = now();
                 PlcReadResponse plcReadResponse = readRequest.execute().get();
